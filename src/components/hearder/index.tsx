@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui/button";
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
-import { Button } from "@/components/ui/button"
+
 function Index() {
+  const location = useLocation();
 
   return (
     <div className="flex justify-between items-center">
@@ -8,15 +11,37 @@ function Index() {
         <img className="h-10 w-10 object-contain" src={Logo} alt="" />
         <h1 className="font-bold text-2xl text-primary">cisum club</h1>
       </div>
-      <div className="gap-[10px] flex items-center">
-        <Button variant="default" className="text-white hover:bg-primary/80">
-          Inicio
-        </Button>
-        <Button variant="outline" >Quem somos</Button>
-        <Button variant="outline" >Quero ser cliente</Button>
-        <Button variant="outline" >Quero ser parceiro</Button>
-        <Button variant="outline" >Parceiros</Button>
-        <Button variant="outline" >Login</Button>
+      <div className="gap-4 flex items-center">
+        <Link to="/">
+          <Button variant={location.pathname === '/' ? 'default' : 'outline'}>
+            Inicio
+          </Button>
+        </Link>
+        <Link to="/quem-somos">
+          <Button variant={location.pathname === '/quem-somos' ? 'default' : 'outline'}>
+            Quem somos
+          </Button>
+        </Link>
+        <Link to="/cliente">
+          <Button variant={location.pathname === '/cliente' ? 'default' : 'outline'}>
+            Quero ser cliente
+          </Button>
+        </Link>
+        <Link to="/parceiro">
+          <Button variant={location.pathname === '/parceiro' ? 'default' : 'outline'}>
+            Quero ser parceiro
+          </Button>
+        </Link>
+        <Link to="/parceiros">
+          <Button variant={location.pathname === '/parceiros' ? 'default' : 'outline'}>
+            Parceiros
+          </Button>
+        </Link>
+        <Link to="/login">
+          <Button variant={location.pathname === '/login' ? 'default' : 'outline'}>
+            Login
+          </Button>
+        </Link>
       </div>
     </div>
   );
