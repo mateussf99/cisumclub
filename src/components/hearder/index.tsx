@@ -1,6 +1,15 @@
-import { Button } from "@/components/ui/button";
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
+import { Menu } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 function Index() {
   const location = useLocation();
@@ -40,6 +49,37 @@ function Index() {
     </>
   );
 
+  const header2 = (
+    <>
+      <DropdownMenu >
+      <DropdownMenuTrigger><Menu className='text-primary'></Menu></DropdownMenuTrigger>
+      <DropdownMenuContent className="font-bold border-none text-primary bg-white" >
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link to="/">Inicio</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/quem-somos">Quem Somos</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/cliente">Quero ser cliente</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/parceiro">Quero ser parceiro</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/parceiros">Parceiros</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/login">Login</Link>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+
+    </>
+  );
+
+
 
   return (
     <div className="flex shadow justify-between items-center">
@@ -50,7 +90,8 @@ function Index() {
         </Link>
       </div>
         <div className="gap-2 p-1 flex items-center">
-            {header}
+            <div className="hidden md:block">{header}</div>
+            <div className="block md:hidden">{header2}</div>
         </div>
     </div>
   );
