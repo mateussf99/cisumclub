@@ -42,7 +42,7 @@ function Index() {
 
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex shadow justify-between items-center">
       <div className="flex items-center gap-2">
         <img className="h-10 w-10 object-contain" src={Logo} alt="" />
         <h1 className="font-bold text-2xl text-primary">cisum club</h1>
