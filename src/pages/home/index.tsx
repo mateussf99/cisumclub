@@ -32,9 +32,9 @@ const index = () => {
           <img src={Image1} alt="imagem que mostra pesoas conectadas"/>
         </div>  
       </div>
-      <div className=' bg bg-primary flex flex-col w-full h-screen items-center justify-center'>
+      <div className=' bg bg-primary flex flex-col w-full h-full md:h-screen items-center justify-center'>
 
-        <div className='flex flex-col  h-[700px] w-[1000px] rounded-2xl  items-center  '>
+        <div className='flex flex-col m-4  md:h-[700px] md:w-[1000px] rounded-2xl  items-center  '>
           <h1 className='text-white font-bold text-5xl mt-10'>
             Nossos Apoiadores
           </h1>
