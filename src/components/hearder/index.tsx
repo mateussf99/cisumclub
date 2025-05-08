@@ -15,7 +15,7 @@ function Index() {
   const location = useLocation();
 
   const header = (
-    <>
+    <div className="flex gap-2">
         <Link to="/">
             <Button variant={location.pathname === '/' ? 'default' : 'outline'}>
               Inicio
@@ -46,7 +46,7 @@ function Index() {
               Login
             </Button>
         </Link>
-    </>
+    </div>
   );
 
   const header2 = (
@@ -82,14 +82,14 @@ function Index() {
 
 
   return (
-    <div className="flex shadow justify-between bg-white items-center">
+    <div className="flex  shadow justify-between bg-white items-center">
       <div className="flex items-center">
         <Link to="/" className="flex items-center">
           <img className="h-10 w-10 object-contain" src={Logo} alt="" />
           <h1 className="font-bold text-2xl text-primary">cisum club</h1>
         </Link>
       </div>
-        <div className="gap-2 p-1 flex items-center">
+        <div className="p-1 flex items-center">
             <div className="hidden md:block">{header}</div>
             <div className="block md:hidden">{header2}</div>
         </div>
