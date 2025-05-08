@@ -2,11 +2,19 @@
 import Header from '../../components/hearder'
 import { Button } from "@/components/ui/button";
 import Image1 from "../../assets/image1.png";
+import Apoiador1 from "../../assets/apoiador1.png";
+import Apoiador2 from "../../assets/apoiador2.jpg";
+import Apoiador3 from "../../assets/apoiador3.png";
+import Apoiador4 from "../../assets/apoiador4.png";
+import Apoiador5 from "../../assets/apoiador5.png";
+import Apoiador6 from "../../assets/apoiador6.png";
+import Apoiador7 from "../../assets/apoiador7.png";
+
 
 const index = () => {
   return (
     
-    <div className='flex flex-col w-full h-screen justify-center bg-primary md:bg-white'>
+    <div className='flex flex-col w-full h-full justify-center bg-primary md:bg-white'>
       <div className='fixed top-0 left-0 w-full z-10 '>
         <Header />
       </div>
@@ -24,11 +32,40 @@ const index = () => {
           <img src={Image1} alt="imagem que mostra pesoas conectadas"/>
         </div>  
       </div>
-      <div className='flex flex-col w-full h-screen items-center'>
-        <h1 className='text-primary font-bold text-5xl'>
-          Nossos Parceiros
-        </h1>
-        <div></div>
+      <div className=' bg bg-primary flex flex-col w-full h-screen items-center justify-center'>
+
+        <div className='flex flex-col  h-[700px] w-[1000px] rounded-2xl  items-center  '>
+          <h1 className='text-white font-bold text-5xl mt-10'>
+            Nossos Apoiadores
+          </h1>
+          <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-10'>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador1} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador2} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador3} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador4} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador5} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador6} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              <img src={Apoiador7} alt=""/>
+            </div>
+            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+              d
+            {/* <img src={Apoiador8} alt=""/> */}
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
