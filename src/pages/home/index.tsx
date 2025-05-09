@@ -9,6 +9,7 @@ import Apoiador4 from "../../assets/apoiador4.png";
 import Apoiador5 from "../../assets/apoiador5.png";
 import Apoiador6 from "../../assets/apoiador6.png";
 import Apoiador7 from "../../assets/apoiador7.png";
+import Apoiador8 from "../../assets/apoiador8.png";
 
 
 const index = () => {
@@ -61,13 +62,14 @@ const index = () => {
               <img src={Apoiador7} alt=""/>
             </div>
             <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
-              d
-            {/* <img src={Apoiador8} alt=""/> */}
+              <img src={Apoiador8} alt=""/>
             </div>
           </div>
         </div>
       </div>
+      <div>
 
+      </div>
     </div>
   )
 }
