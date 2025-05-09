@@ -20,11 +20,11 @@ const index = () => {
         <Header />
       </div>
       <div className='flex md:mt-14 p-1 items-center h-screen justify-center md:p-4  md:justify-between md:w-full md:h-screen'>
-        <div className='flex p-10 gap-4 bg-white rounded-[10px] h-1/2 w-[400px] flex-col  items-center justify-center md:w-1/2 md:h-screen '>
-          <h1 className='text-3xl md:text-5xl text-primary font-bold '>
+        <div className='flex p-10 gap-4 mt-4 bg-white rounded-[10px] h-[450px] w-[400px] flex-col  items-center justify-center md:w-1/2 md:h-screen '>
+          <h1 className='text-3xl md:text4xl text-primary font-bold '>
             Benefícios Exclusivos para Todos, em um Só Lugar.
           </h1>
-          <p className='md:text-3xl mt-5'>
+          <p className='md:text-2xl mt-5'>
             Acesse um clube que conecta empresas e clientes, oferecendo benefícios exclusivos e personalizados de forma simples e prática.
           </p>
           <Button variant="default" className='md:text-xl h-11'>Empresas Paceiras</Button>
@@ -33,42 +33,59 @@ const index = () => {
           <img src={Image1} alt="imagem que mostra pesoas conectadas"/>
         </div>  
       </div>
-      <div className=' bg bg-primary flex flex-col w-full h-full md:h-screen items-center justify-center'>
+      <div className=' bg bg-primary mb-10 flex flex-col w-full h-full md:h-screen items-center justify-center'>
 
         <div className='flex flex-col m-4  md:h-[700px] md:w-[1000px] rounded-2xl  items-center  '>
           <h1 className='text-white font-bold text-5xl mt-10'>
             Nossos Apoiadores
           </h1>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-4 mt-10'>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador1} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador2} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador3} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador4} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador5} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador6} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador7} alt=""/>
             </div>
-            <div className='h-60 w-60 bg-white rounded-[10px] flex items-center justify-center'>
+            <div className='h-55 w-55 bg-white rounded-[10px] flex items-center justify-center'>
               <img src={Apoiador8} alt=""/>
             </div>
           </div>
         </div>
       </div>
-      <div>
+      <div className='flex flex-col md:flex-row h-full w-full  bg-white items-center  '>
+        <div className='flex flex-col m-4  items-center  '>
+          <h1 className='text-primary font-bold text-3xl mt-10'>
+            Estratégia de marketing
+          </h1>
+          <p className='p-20 pt-0'>
+            Buscamos empresas parceiras comprometidas em oferecer descontos exclusivos aos nossos membros. Para os clientes, conseguem obter benefícios relevantes que agregam valor à sua experiência no clube. Já para as empresas parceiras, adquirem maior visibilidade, atração de novos clientes e fortalecimento da marca.
+          </p>
+        </div>
 
+        <div className='flex flex-col m-4  items-center  '>
+          <h1 className='text-primary font-bold text-3xl mt-10'>
+            Clubes de Benefícios
+          </h1>
+          <p className='p-20 pt-0'>
+            O clube de benefícios conecta clientes a descontos exclusivos em empresas parceiras, criando uma rede vantajosa para todos. Os membros do clube aproveitam vantagens exclusivas que agregam valor ao seu dia a dia, enquanto as empresas parceiras aumentam sua visibilidade, atraem um público qualificado e fortalecem sua reputação no mercado, ampliando suas oportunidades de crescimento.
+          </p>
+
+        </div>
       </div>
     </div>
   )
