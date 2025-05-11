@@ -19,7 +19,7 @@ const index = () => {
       <div className='fixed top-0 left-0 w-full z-10 '>
         <Header />
       </div>
-      <div className='flex md:mt-14 p-1 items-center h-screen justify-center md:p-4  md:justify-between md:w-full md:h-screen'>
+      <section className='flex md:mt-14 p-1 items-center h-screen justify-center md:p-4  md:justify-between md:w-full md:h-screen'>
         <div className='flex p-10 gap-4 mt-4 bg-white rounded-[10px] h-[450px] w-[400px] flex-col  items-center justify-center md:w-1/2 md:h-screen '>
           <h1 className='text-3xl md:text-5xl text-primary font-bold '>
             Benefícios Exclusivos para Todos, em um Só Lugar.
@@ -32,8 +32,8 @@ const index = () => {
         <div className='hidden md:flex'>
           <img src={Image1} alt="imagem que mostra pesoas conectadas"/>
         </div>  
-      </div>
-      <div className=' bg bg-primary mb-10 flex flex-col w-full h-full md:h-screen items-center justify-center'>
+      </section>
+      <section className=' bg bg-primary mb-10 flex flex-col w-full h-full md:h-screen items-center justify-center'>
 
         <div className='flex flex-col m-4  md:h-[700px] md:w-[900px] rounded-2xl  items-center  '>
           <h1 className='text-white font-bold text-3xl md:text-5xl mt-10'>
@@ -66,8 +66,8 @@ const index = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className='flex flex-col h-screen w-full bg-white items-center md:flex-row '>
+      </section>
+      <section className='flex flex-col h-screen w-full bg-white items-center md:flex-row '>
 
         <div className='flex flex-col m-4  items-center  '>
           <h1 className='text-primary font-bold text-2xl md:text-5xl mt-10 mb-4'>
@@ -87,7 +87,7 @@ const index = () => {
           </p>
         </div>
 
-      </div>
+      </section>
     </div>
   )
 }
