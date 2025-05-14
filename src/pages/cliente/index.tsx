@@ -96,7 +96,10 @@ function index() {
                   Cliente Vitalício 601 a 700 <br />
                   Cliente Vitalício 701 a 800 <br />
                   Cliente Vitalício 801 a 900 <br />
-                  Cliente Vitalício 901 a 1000 <br />
+                            .                <br />
+                            .                <br />
+                            .                <br />
+                  Cliente Vitalício 9901 a 10000 <br />
                 </p>
               </div>
               <div>
@@ -113,6 +116,9 @@ function index() {
                   U$70,00 <br />
                   U$80,00 <br />
                   U$90,00 <br />
+                      .       <br />
+                      .       <br />
+                      .       <br />
                   U$1.000,00 <br />
                 </p>
               </div>
