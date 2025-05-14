@@ -1,5 +1,5 @@
-import Header from '../../components/hearder'
 import { Button } from "@/components/ui/button";
+import Header from '../../components/hearder';
 
 function index() {
   return (
@@ -7,15 +7,15 @@ function index() {
         <div className='fixed top-0 left-0 w-full z-10 '>
             <Header />
         </div>
-        <div className='bg-primary pb-2 mt-10 flex-col w-full h-full justify-center items-center'>
+        <div className='bg-primary pb-2 mt-10 flex-col w-full h-full justify-center items-center '>
           <div className='flex justify-center'>
             <h1 className='text-2xl text-white font-bold mb-5 mt-5 md:text-4xl'>
             Nossos Planos
           </h1>
           </div>
           
-          <div className=' bg-primary  flex-col w-full h-screen justify-center items-center md:items-stretch'>
-            <div className='flex flex-col md:flex-row  gap-5 w-full h-full justify-center items-center'>
+          <div className=' bg-primary  flex-col w-full h-screen justify-center items-center '>
+            <div className='flex flex-col md:flex-row  gap-5 w-full h-full justify-center items-center md:items-stretch'>
               <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[250px] md:mt-7'>
                 <h1 className='text-[15px] text-primary font-bold '>
                   Plano Básico
