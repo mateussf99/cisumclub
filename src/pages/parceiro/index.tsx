@@ -62,17 +62,42 @@ function index() {
         <h1 className='text-2xl text-primary font-bold mb-5 mt-13 md:text-4xl'>
           Como funciona o processo de verificação?
         </h1>
-        <div className='flex-col md:flex-row justify-items-center items-center'>
+        <div className='flex flex-col gap-5 md:flex-row justify-items-center items-center'>
           <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
-           
+            
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               O cliente é membro e quer comprar, como faço?
             </h1>
             <p className='p-3 mb-5 text-justify text-[13px]'>
               O primeiro passo para se tornar um parceiro do CISUM Club é preencher o formulário de parceria disponível em nosso site. Nele, você fornecerá informações sobre sua empresa e os benefícios que deseja oferecer aos nossos clientes.
             </p>
-            <Button variant="default">Quero ser Parceiro</Button>
+            <Button variant="default">Verificar Cliente</Button>
           </div>
+
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
+            
+            <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
+              O cadastro está válido, o que faço?
+            </h1>
+            <p className='p-3 mb-5 text-justify text-[13px]'>
+              Perfeito! Se o cadastro está válido, basta fornecer o benefício definido pela parceria, e pronto! Simples assim!
+
+            </p>
+            <Button variant="default">Verificar Cliente</Button>
+          </div>
+
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
+            
+            <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
+              O cadastro está vencido! E agora?
+            </h1>
+            <p className='p-3 mb-5 text-justify text-[13px]'>
+              Tranquilo, acontece. Agora você informa ao cliente que o cadastro dele está inválido, e por este motivo não conseguimos fornecer o benefício pré acordado. Pede para ele entrar em contato com a gente para que possamos entender o por quê e viabilizar da melhor maneira para que ele possa renovar e voltar a ser membro!
+
+            </p>
+            <Button variant="default">Verificar Cliente</Button>
+          </div>
+
         </div>
       </div>
     </div>
