@@ -58,6 +58,23 @@ function index() {
         </div>
         
       </div>
+      <div className='flex-col w-full h-screen bg-white justify-items-center items-center'>
+        <h1 className='text-2xl text-primary font-bold mb-5 mt-13 md:text-4xl'>
+          Como funciona o processo de verificação?
+        </h1>
+        <div className='flex-col md:flex-row justify-items-center items-center'>
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
+           
+            <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
+              O cliente é membro e quer comprar, como faço?
+            </h1>
+            <p className='p-3 mb-5 text-justify text-[13px]'>
+              O primeiro passo para se tornar um parceiro do CISUM Club é preencher o formulário de parceria disponível em nosso site. Nele, você fornecerá informações sobre sua empresa e os benefícios que deseja oferecer aos nossos clientes.
+            </p>
+            <Button variant="default">Quero ser Parceiro</Button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
