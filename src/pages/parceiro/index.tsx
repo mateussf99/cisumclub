@@ -16,8 +16,8 @@ function index() {
             Ao se tornar parceiro do NFTudio, sua empresa oferece benefícios exclusivos aos nossos clientes, sem custos de adesão. A parceria é facilitada por contrato e permite que você alcance uma nova base de clientes, com fácil gestão de acessos e validação de benefícios. Entre em contato para mais informações!
           </p>
         </div>
-        <div className=' grid md:grid-cols-2 gap-5 w-full h-full justify-items-center items-center'>
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg p bg-white '>
+        <div className=' grid md:grid-cols-2 gap-50 h-full justify-items-center items-center'>
+          <div className='flex-col h-[400px] w-[350px] justify-items-center rounded-lg  bg-white content-around '>
             <h1 className='text-xl text-center  font-bold mb-5 mt-5 md:text-2xl'>
               Sem custos de adesão
             </h1>
@@ -27,7 +27,7 @@ function index() {
             <Button variant="default">Quero ser Parceiro</Button>
           </div>
 
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg p bg-white '>
+          <div className='flex-col h-[400px] w-[350px] justify-items-center rounded-lg content-around  bg-white '>
             <h1 className='text-xl text-center  font-bold mb-5 mt-5 md:text-2xl'>
               Acesso a uma nova base de clientes
             </h1>
@@ -37,7 +37,7 @@ function index() {
             <Button variant="default">Quero ser Parceiro</Button>
           </div>
 
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg p bg-white '>
+          <div className='flex-col h-[400px] w-[350px] justify-items-center rounded-lg  bg-white content-around '>
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               Ofereça benefícios exclusivos
             </h1>
@@ -46,7 +46,7 @@ function index() {
             </p>
             <Button variant="default">Quero ser Parceiro</Button>
           </div>
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg p bg-white '>
+          <div className='flex-col h-[400px] w-[350px] justify-items-center rounded-lg  bg-white content-around '>
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               Marketing Cruzado
             </h1>
@@ -58,13 +58,17 @@ function index() {
         </div>
         
       </div>
-      <div className='flex-col w-full h-screen bg-white justify-items-center items-center'>
+      <div className='flex-col w-full h-screen bg-white justify-items-center items-center '>
         <h1 className='text-2xl text-primary font-bold mb-5 mt-13 md:text-4xl'>
           Como funciona o processo de verificação?
         </h1>
-        <div className='flex flex-col gap-5 md:flex-row justify-items-center items-center'>
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
-            
+        <div className='flex flex-col gap-10 md:flex-row justify-items-center items-center mt-20 '>
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary bg-white relative content-around'>
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div className="bg-primary text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-bold">
+                1
+              </div>
+            </div>
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               O cliente é membro e quer comprar, como faço?
             </h1>
@@ -74,8 +78,12 @@ function index() {
             <Button variant="default">Verificar Cliente</Button>
           </div>
 
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
-            
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white relative content-around '>
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div className="bg-primary text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-bold">
+                2
+              </div>
+            </div>
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               O cadastro está válido, o que faço?
             </h1>
@@ -86,8 +94,12 @@ function index() {
             <Button variant="default">Verificar Cliente</Button>
           </div>
 
-          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white '>
-            
+          <div className='flex-col h-[350px] w-[350px] justify-items-center rounded-lg border border-primary p bg-white relative content-around '>
+            <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div className="bg-primary text-white w-10 h-10 flex items-center justify-center rounded-full text-lg font-bold">
+                3
+              </div>
+            </div>
             <h1 className='text-xl text-center font-bold mb-5 mt-5 md:text-2xl'>
               O cadastro está vencido! E agora?
             </h1>
