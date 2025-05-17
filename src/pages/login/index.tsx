@@ -1,15 +1,43 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { authService } from "@/services/api";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from '../../assets/Logo.png';
-import { useState } from "react"
 
 function index() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    console.log({ email, password })
+    
+    if (!email || !password) {
+      setError("Por favor, preencha todos os campos")
+      return
+    }
+    
+    setLoading(true)
+    setError("")
+    
+    try {
+      const response = await authService.login(email, password)
+      console.log("Login realizado com sucesso:", response)
+      // Redirecionar para a página principal após login bem-sucedido
+      navigate("/")
+    } catch (err: any) {
+        console.log(email, password)
+    //   console.error("Erro ao fazer login:", err)
+      setError(
+        err.response?.data?.message || 
+        "Falha ao fazer login. Verifique suas credenciais."
+      )
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -21,6 +49,11 @@ function index() {
                 <h1 className="text-xl text-primary font-bold mb-5">Login</h1>
             </div>
             
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">
+                {error}
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
               <div className="">
@@ -34,6 +67,7 @@ function index() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="border border-primary rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  disabled={loading}
                 />
               </div>
               
@@ -48,10 +82,17 @@ function index() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="border border-primary rounded-md p-2 focus:outline-none focus:ring-0 focus:ring-primary"
+                  disabled={loading}
                 />
               </div>
               
-              <Button type="submit" className="mt-4">Entrar</Button>
+              <Button 
+                type="submit" 
+                className="mt-4"
+                disabled={loading}
+              >
+                {loading ? "Entrando..." : "Entrar"}
+              </Button>
             </form>
         </div>
     </div>
