@@ -3,10 +3,7 @@ import Header from '../../components/hearder'
 function index() {
   return (
     <div className='flex flex-col w-full h-full justify-center bg-white'>
-        <div className='fixed top-0 left-0 w-full z-10 '>
-            <Header />
-        </div>
-        <div className='flex-col items-center justify-center h-screen mt-10'>
+        <div className='flex-col items-center justify-center h-screen'>
             <div className='flex flex-col items-center justify-center p-5 md:p-30 h-screen'>
                 <h1 className='text-xl md:text-3xl font-bold text-primary'>
                     Quem somos nós

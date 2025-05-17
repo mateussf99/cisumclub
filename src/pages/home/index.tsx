@@ -1,5 +1,3 @@
-
-import Header from '../../components/hearder'
 import { Button } from "@/components/ui/button";
 import Image1 from "../../assets/image1.png";
 import Apoiador1 from "../../assets/apoiador1.png";
@@ -16,10 +14,7 @@ const index = () => {
   return (
     
     <div className='flex flex-col w-full h-full justify-center bg-primary lg:bg-white'>
-      <div className='fixed top-0 left-0 w-full z-10 '>
-        <Header />
-      </div>
-      <div className='flex md:mt-14 p-1 items-center h-screen justify-center md:p-4  lg:justify-between md:w-full md:h-screen'>
+      <div className='flex p-1 items-center h-screen justify-center md:p-4  lg:justify-between md:w-full md:h-screen'>
         <div className='flex p-10 gap-4 mt-4 bg-white rounded-[10px] h-[450px] w-[350px] flex-col  items-center justify-center lg:w-1/2 md:h-screen '>
           <h1 className='text-3xl md:text-5xl text-primary font-bold '>
             Benefícios Exclusivos para Todos, em um Só Lugar.

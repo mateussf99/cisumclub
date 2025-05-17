@@ -1,12 +1,8 @@
-import Header from '../../components/hearder';
 import { Button } from "@/components/ui/button";
 
 function index() {
   return (
     <div className='flex flex-col w-full h-full justify-center bg-primary'>
-      <div className='fixed top-0 left-0 w-full z-10 '>
-        <Header />
-      </div>
       <div className='pb-2 mt-10 flex-col w-full  justify-items-center items-center '>
         <h1 className='text-2xl text-white font-bold mb-5 mt-5 md:text-4xl'>
           Para Empresas
