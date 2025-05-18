@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 function index() {
   return (
     <div className='flex flex-col w-full h-full justify-center bg-white'>
-      <div className=' bg-primary  flex-col w-full md:h-screen justify-items-center items-center '>
-        <h1 className='text-2xl text-white font-bold mb-5 mt-5 md:text-4xl'>
+      <div className=' bg-primary  flex-col w-full  justify-items-center items-center '>
+        <h1 className='text-3xl text-white font-bold mb-5 mt-5 md:text-5xl'>
           Nossos Planos
         </h1>
-        <div className='flex flex-col md:flex-row  gap-5 w-full h-full justify-center items-center '>
-          <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[250px] md:mt-7'>
+        <div className='flex flex-col md:flex-row  gap-5 w-full h-full justify-center items-center lg:items-stretch p-2 '>
+          <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[300px] md:mt-7'>
             <h1 className='text-[15px] text-primary font-bold '>
               Plano Básico
             </h1>
@@ -28,7 +28,7 @@ function index() {
           </div>
           
 
-          <div className='bg-white w-[200px] h-[300px]  rounded-lg shadow-lg flex flex-col justify-center items-center'>
+          <div className='bg-white w-[200px] h-[300px] md:h-[350px] rounded-lg shadow-lg flex flex-col justify-center items-center'>
             <h1 className='text-[15px] text-primary font-bold '>
               Plano Vitalício
             </h1>
@@ -46,7 +46,7 @@ function index() {
             </Button>
           </div>
 
-          <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[250px] md:mt-7'>
+          <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[300px] md:mt-7'>
             <h1 className='text-[15px] text-primary font-bold '>
               Plano Anual
             </h1>
