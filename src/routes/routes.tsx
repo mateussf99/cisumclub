@@ -13,6 +13,8 @@ import Parceiros from '../pages/parceiros';
 import Quem_somos from '../pages/quem_somos';
 import Privacidade from '../pages/privacidade';
 import Termos from '../pages/termos';
+import Perguntas from '../pages/perguntas';
+
 
 
 function AppRoutes() {
@@ -34,8 +36,8 @@ function AppRoutes() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/privacidade" element={<Privacidade />} />
                             <Route path="/termos" element={<Termos />} />
+                            <Route path="/faq" element={<Perguntas />} />
                             
-
                         </Routes>
                     </div>
                     

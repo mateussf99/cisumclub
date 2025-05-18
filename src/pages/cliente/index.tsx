@@ -81,7 +81,13 @@ function index() {
               A tabela ao lado mostra como funciona:
             </p>
           </div>
-          <Button variant="default" className="md:text-xl">Lista de espera</Button>
+          <Button 
+            variant="default"
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdmyMWsiI1PR6K4QOgRA4aSMLmcCtJ_ITrqDLRAr-4jnMsnRA/viewform', '_blank', 'noopener,noreferrer')}
+            className="md:text-xl"
+          >
+            Lista de espera
+          </Button>
           
         </div>
       <div className='flex-col mt-4 md:w-1/2 justify-items-center'>

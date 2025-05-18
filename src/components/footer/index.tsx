@@ -21,21 +21,26 @@ function index() {
       
       <div className="flex flex-col w-1/3 border-l border-primary pl-4">
 
-        <Link to="/privacidade" className="text-sm text-gray-600 hover:text-primary">
+        <Link to="/privacidade" className="text-sm hover:text-primary">
           Política de Privacidade
         </Link>
-        <Link to="/termos" className="text-sm text-gray-600 hover:text-primary">
+        <Link to="/termos" className="text-sm hover:text-primary">
           Termos e Condições
         </Link>
-        <Link to="/contato" className="text-sm text-gray-600 hover:text-primary">
+        <a 
+          href="https://wa.me/5582999181421"
+          className="text-sm hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Contato
-        </Link>
-        <Link to="/faq" className="text-sm text-gray-600 hover:text-primary">
+        </a>
+        <Link to="/faq" className="text-sm hover:text-primary">
           FAQ
         </Link>
       </div>
       <div className='border-l border-primary pl-4'>
-        <p className='w-1/3 text-sm text-gray-600'>
+        <p className='w-1/3 text-sm'>
             AV COMENDADOR GUSTAVO PAIVA, 5945, LOJA 3026 SALA N3 COWORKING, PARQUE SHOPPING MACEIÓ, CRUZ DAS ALMAS, MACEIÓ - AL
         </p>
       </div>

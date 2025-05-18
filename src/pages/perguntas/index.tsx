@@ -1,8 +1,7 @@
 
-
-function intex() {
+function index() {
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-12 text-justify">
+     <div className="max-w-4xl mx-auto p-6 space-y-12 text-justify">
       <section>
         <h1 className="text-4xl font-bold text-center">Perguntas Frequentes (FAQ) - CISUM Club</h1>
       </section>
@@ -118,4 +117,4 @@ function intex() {
   )
 }
 
-export default intex
+export default index
