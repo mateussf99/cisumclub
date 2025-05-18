@@ -19,13 +19,13 @@ function Index() {
   
   // Verificar estado de autenticação quando o componente montar
   useEffect(() => {
-    const checkAuth = async () => {
-      const isAuth = await authService.isAuthenticated();
-      setIsAuthenticated(isAuth);
-    };
-    
-    checkAuth();
-  }, []);
+  const checkAuth = async () => {
+    const isAuth = await authService.isAuthenticated();
+    setIsAuthenticated(isAuth);
+  };
+  
+  checkAuth();
+}, []);
 
   // Função para fazer logout
   const handleLogout = () => {

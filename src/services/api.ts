@@ -64,12 +64,6 @@ const authService = {
         email, 
         password 
       });
-      console.log("test",document.cookie);
-      console.log('Login bem-sucedido, cookies foram definidos pelo servidor');
-      
-      // Verificar o token para debug
-      const token = getToken();
-      console.log('Token nos cookies:', token ? 'Presente' : 'Ausente');
       
       return response.data;
     } catch (error) {
@@ -98,8 +92,11 @@ const authService = {
     try {
       // Tente acessar qualquer endpoint protegido já existente
       // Por exemplo, um endpoint que busca dados do usuário ou qualquer outro recurso protegido
-      await api.get('/associates'); // ou qualquer outro endpoint protegido que você já tenha
-      
+      const response = await api.get('/associate/manage'); // ou qualquer outro endpoint protegido que você já tenha
+      if (response.status === 200) {
+        console.log('Endpoint protegido acessado com sucesso. Status:', response.status);
+      }
+      console.log('Usuário autenticado com sucesso');
       // Se não lançar erro, está autenticado
       return true;
     } catch (error: any) {
