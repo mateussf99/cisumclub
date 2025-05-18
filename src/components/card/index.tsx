@@ -31,14 +31,15 @@ interface LinkItem {
 }
 
 interface CardProps {
-  id: number; // ID do parceiro para exclusão
+  id: number;
   title: string;
   operations?: string;
   benefit?: string;
   location?: string;
   links?: LinkItem[];
-  situation?: string; // Adicionado campo situation
-  onDelete?: () => void; // Callback opcional para atualizar a lista após exclusão
+  situation?: string;
+  associateImagemUrl?: string; // URL do Google Drive
+  onDelete?: () => void;
 }
 
 // Função auxiliar para truncar texto
@@ -75,14 +76,15 @@ function index(props: CardProps) {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   
-  // Estados para os campos do formulário de edição - atualizado para incluir situation
+  // Estados para os campos do formulário de edição
   const [editForm, setEditForm] = useState({
     title: props.title,
     operations: props.operations || '',
     benefit: props.benefit || '',
     location: props.location || '',
     links: props.links || [],
-    situation: props.situation || 'Primeiro Contato' // Adicionado com valor padrão
+    situation: props.situation || '',
+    associateImagemUrl: props.associateImagemUrl || '' // URL do Google Drive
   });
   
   // Estado para novo link sendo adicionado
@@ -94,7 +96,10 @@ function index(props: CardProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  // Função para atualizar os campos do formulário
+  // Adicione este estado
+  const [imageError, setImageError] = useState(false);
+
+  // Função para atualizar os campos do formulário de edição
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setEditForm(prev => ({ ...prev, [name]: value }));
@@ -112,7 +117,7 @@ function index(props: CardProps) {
       links: [...prev.links, { id: null, ...newLink }]
     }));
     
-    setNewLink({ name: '', type: '' }); // Limpar o formulário do link
+    setNewLink({ name: '', type: '' });
   };
 
   // Função para remover um link da lista
@@ -141,30 +146,24 @@ function index(props: CardProps) {
         id: props.id,
         description: "", 
         email: "", 
-        situation: editForm.situation, // Usando o valor selecionado
-        associateImagemUrl: "", 
+        situation: editForm.situation,
+        associateImagemUrl: editForm.associateImagemUrl, // Link do Google Drive
         operations: [
           {
             name: editForm.operations
           }
         ],
         location: editForm.location,
-        links: editForm.links // Adicionar links ao payload
+        links: editForm.links
       };
 
-      // Fazer a chamada à API para atualizar o parceiro
-      console.log("Payload para atualização:", payload);
       await api.put(`/associate/${props.id}`, payload);
       
-      // Notificar sucesso
       toast.success(`O parceiro "${editForm.title}" foi atualizado com sucesso.`);
-      
-      // Fechar o diálogo após salvar
       setEditDialogOpen(false);
       
-      // Atualizar a lista, se callback fornecido
       if (props.onDelete) {
-        props.onDelete(); // Reutilizar o callback de delete para atualizar a lista
+        props.onDelete();
       }
     } catch (error: any) {
       console.error('Erro ao atualizar parceiro:', error);
@@ -184,29 +183,21 @@ function index(props: CardProps) {
     setIsDeleting(true); 
     
     try {
-      // Fazer a chamada à API para excluir o parceiro
       await api.delete(`/associate/${props.id}`);
-      
-      // Notificar sucesso
       toast.success(`O parceiro "${props.title}" foi excluído com sucesso.`);
-      
-      // Fechar o diálogo após exclusão
       setDeleteDialogOpen(false);
       
-      // Chamar o callback para atualizar a lista, se fornecido
       if (props.onDelete) {
         props.onDelete();
       }
     } catch (error: any) {
       console.error('Erro ao excluir parceiro:', error);
-      
-      // Notificar erro
       toast.error(error.response?.data?.message || "Ocorreu um erro ao excluir o parceiro.");
     } finally {
-      setIsDeleting(false); // ✅ Define como false no final
+      setIsDeleting(false);
     }
   };
-  
+
   return (
     <div className="flex items-center p-2 h-[250px] w-[360px] md:h-[300px] md:w-[600px] bg-white rounded-lg shadow-lg relative">
       
@@ -243,7 +234,19 @@ function index(props: CardProps) {
 
       <div className="flex item-center justify-items-center w-[300px] md:w-[500px]">
         <div className="flex rounded-10 w-[100px] md:w-[200px] items-center justify-center">
-          <Image className="text-gray-500 h-16 w-16 md:h-24 md:w-24" />
+          {props.associateImagemUrl && !imageError ? (
+            <img 
+              src={props.associateImagemUrl}
+              alt={`Logo ${props.title}`}
+              className="h-16 w-16 md:h-24 md:w-24 object-contain"
+              onError={() => {
+                // Se a imagem falhar, marcamos o erro e exibimos o ícone
+                setImageError(true);
+              }}
+            />
+          ) : (
+            <Image className="text-gray-500 h-16 w-16 md:h-24 md:w-24" />
+          )}
         </div>
         
         <div className="flex flex-col w-[150px] md:w-[300px]">
@@ -254,7 +257,8 @@ function index(props: CardProps) {
           {/* Mostrar situação apenas para usuários autenticados */}
           {isAuthenticated && props.situation && (
             <p className="w-full text-[11px] md:text-[15px] overflow-hidden text-ellipsis mb-1">
-              <span className="font-bold">Situação: </span>{props.situation}
+              <span className="font-bold">Situação: </span>
+                {props.situation}
             </p>
           )}
           
@@ -298,10 +302,9 @@ function index(props: CardProps) {
             </div>
           )}
         </div>
-
       </div>
       
-      {/* Diálogo de Edição - Atualizado com gerenciamento de links */}
+      {/* Diálogo de Edição */}
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -323,6 +326,23 @@ function index(props: CardProps) {
                 onChange={handleInputChange}
                 className="col-span-3"
               />
+            </div>
+            
+            {/* Campo para Link da Imagem (Google Drive) */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="imageUrl" className="text-right">
+                Logo
+              </Label>
+              <div className="col-span-3">
+                <Input
+                  id="imageUrl"
+                  name="associateImagemUrl"
+                  value={editForm.associateImagemUrl || ''}
+                  onChange={handleInputChange}
+                  placeholder="URL (ex: https://link.com/)"
+                  className="w-full"
+                />
+              </div>
             </div>
             
             {/* Campo de situação */}
@@ -383,7 +403,7 @@ function index(props: CardProps) {
               />
             </div>
             
-            {/* Nova seção de links */}
+            {/* Seção de links */}
             <div className="grid grid-cols-4 items-center gap-4 mt-4">
               <Label className="text-right">
                 Links
@@ -415,7 +435,7 @@ function index(props: CardProps) {
                 <div className="space-y-2">
                   <div className="grid grid-cols-2 gap-2">
                     <Input
-                      placeholder="URL (ex: https://linkedin.com/company)"
+                      placeholder="URL (ex: https://link.com/)"
                       value={newLink.name}
                       onChange={(e) => setNewLink(prev => ({ ...prev, name: e.target.value }))}
                     />

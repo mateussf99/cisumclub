@@ -28,6 +28,8 @@ interface NewPartnerForm {
     name: string;
     type: string;
   }[];
+  associateImagemUrl?: string; // Adicionado campo para URL da imagem
+  situation: string; // Também é bom adicionar o campo situation
 }
 
 interface Partner {
@@ -38,7 +40,7 @@ interface Partner {
   benefit: string | null;
   location: string | null;
   situation: string;
-  associateImagemUrl: string | null;
+  associateImagemUrl: string | undefined;
   operations: string[];
   links: {
     id: number | null;
@@ -66,7 +68,6 @@ function index() {
   const [areaFilter, setAreaFilter] = useState('');
   const [uniqueLocations, setUniqueLocations] = useState<string[]>([]);
   const [uniqueOperations, setUniqueOperations] = useState<string[]>([]);
-  // Adicionar estes novos estados
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [newPartnerForm, setNewPartnerForm] = useState<NewPartnerForm>({
@@ -74,7 +75,9 @@ function index() {
     operations: '',
     benefit: '',
     location: '',
-    links: []
+    links: [],
+    associateImagemUrl: '', // Inicializado vazio
+    situation: 'Primeiro Contato' // Valor padrão
   });
   const [newLink, setNewLink] = useState<{ name: string; type: string }>({
     name: '',
@@ -89,11 +92,10 @@ function index() {
       // Escolher a rota com base no estado de autenticação
       const endpoint = isAuthenticated ? '/associate/manage' : '/associate/home';
       
-      // Adicionar parâmetros de paginação para obter todos os registros
-      // Usando um valor alto para pageSize e começando na página 1
       const response = await api.get<ApiResponse>(`${endpoint}?pageNumber=1&pageSize=1000`);
       
       setPartners(response.data.data);
+      
       
       // Extrair localizações únicas
       const locations = response.data.data
@@ -137,7 +139,7 @@ function index() {
     return matchesSearch && matchesArea && matchesLocation;
   });
 
-  const handleNewPartnerInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleNewPartnerInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewPartnerForm(prev => ({ ...prev, [name]: value }));
   };
@@ -178,18 +180,18 @@ function index() {
       const payload = {
         name: newPartnerForm.name,
         benefit: newPartnerForm.benefit,
-        userId: "string",
+        userId: "",
         description: "",
         email: "",
-        situation: "",
-        associateImagemUrl: "",
+        situation: newPartnerForm.situation,
+        associateImagemUrl: newPartnerForm.associateImagemUrl, // Usar o valor do formulário
         operations: [
           {
             name: newPartnerForm.operations
           }
         ],
         location: newPartnerForm.location,
-        links: newPartnerForm.links  // Adicione esta linha
+        links: newPartnerForm.links
       };
 
       // Enviar para a API
@@ -204,7 +206,9 @@ function index() {
         operations: '',
         benefit: '',
         location: '',
-        links: []
+        links: [],
+        associateImagemUrl: '', // Adicionar este campo
+        situation: 'Primeiro Contato' // Adicionar este campo com valor padrão
       });
       setCreateDialogOpen(false);
       
@@ -301,6 +305,7 @@ function index() {
                 location={partner.location || 'Maceió - AL'}
                 links={partner.links}
                 situation={partner.situation} 
+                associateImagemUrl={partner.associateImagemUrl} // Adicionar esta prop
                 onDelete={fetchPartners}
               />
             ))
@@ -335,6 +340,41 @@ function index() {
                 className="col-span-3"
                 required
               />
+            </div>
+            
+            {/* Campo para Logo (igual ao do Card) */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="associateImagemUrl" className="text-right">
+                Logo
+              </Label>
+              <div className="col-span-3">
+                <Input
+                  id="associateImagemUrl"
+                  name="associateImagemUrl"
+                  value={newPartnerForm.associateImagemUrl}
+                  onChange={handleNewPartnerInputChange}
+                  placeholder="URL (ex: https://link.com/)"
+                  className="w-full"
+                />
+              </div>
+            </div>
+            
+            {/* Campo de situação */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="situation" className="text-right">
+                Situação
+              </Label>
+              <select
+                id="situation"
+                name="situation"
+                value={newPartnerForm.situation}
+                onChange={handleNewPartnerInputChange}
+                className="col-span-3 h-10 rounded-md border border-input px-3 py-2 text-sm"
+              >
+                <option value="Primeiro Contato">Primeiro Contato</option>
+                <option value="Parceria Concluída e Publicada">Parceria Concluída e Publicada</option>
+                <option value="Parceria Rejeitada">Parceria Rejeitada</option>
+              </select>
             </div>
             
             <div className="grid grid-cols-4 items-center gap-4">
