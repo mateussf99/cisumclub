@@ -8,6 +8,8 @@ import Parceiro from '../pages/parceiro';
 import Parceiros from '../pages/parceiros';
 import Quem_somos from '../pages/quem_somos';
 import { AuthProvider } from '../contexts/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AppRoutes() {
     return (
@@ -26,6 +28,18 @@ function AppRoutes() {
                         <Route path="/login" element={<Login />} />
                     </Routes>
                 </div>
+                <ToastContainer 
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </BrowserRouter>
         </AuthProvider>
     );

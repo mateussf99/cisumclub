@@ -151,16 +151,18 @@ function index() {
       ) : error ? (
         <div className="text-red-400 bg-white p-4 rounded">{error}</div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {filteredPartners.length > 0 ? (
             filteredPartners.map((partner) => (
               <Card 
                 key={partner.id}
+                id={partner.id} // Adicione esta linha
                 title={partner.name}
                 benefit={partner.benefit || 'Benefício não especificado'}
                 operations={partner.operations.length > 0 ? partner.operations[0] : 'Não especificado'}
                 location={partner.location || 'Maceió - AL'}
                 links={partner.links}
+                onDelete={fetchPartners} // Opcional: para recarregar a lista após exclusão
               />
             ))
           ) : (
