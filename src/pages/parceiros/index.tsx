@@ -11,6 +11,7 @@ interface Partner {
   description: string | null;
   email: string | null;
   benefit: string | null;
+  location: string | null;
   situation: string;
   associateImagemUrl: string | null;
   operations: string[];
@@ -37,6 +38,8 @@ function index() {
   const [searchTerm, setSearchTerm] = useState('');
   const [locationFilter, setLocationFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
+  const [uniqueLocations, setUniqueLocations] = useState<string[]>([]);
+  const [uniqueOperations, setUniqueOperations] = useState<string[]>([]);
 
   // Função para buscar os parceiros da API
   const fetchPartners = async () => {
@@ -44,6 +47,21 @@ function index() {
       setLoading(true);
       const response = await api.get<ApiResponse>('/associate/home');
       setPartners(response.data.data);
+      
+      // Extrair localizações únicas
+      const locations = response.data.data
+        .map(partner => partner.location)
+        .filter((location): location is string => location !== null && location !== '')
+        .sort();
+      setUniqueLocations(Array.from(new Set(locations)));
+
+      // Extrair operações únicas
+      const operations = response.data.data
+        .flatMap(partner => partner.operations)
+        .filter(op => op !== '')
+        .sort();
+      setUniqueOperations(Array.from(new Set(operations)));
+      
       setError(null);
     } catch (err) {
       console.error('Erro ao buscar parceiros:', err);
@@ -93,11 +111,11 @@ function index() {
               onChange={(e) => setLocationFilter(e.target.value)}
             >
               <option value="">Localização</option>
-              <option value="Maceió">Maceió</option>
-              <option value="Rio de Janeiro">Rio de Janeiro</option>
-              <option value="Minas Gerais">Minas Gerais</option>
-              <option value="Bahia">Bahia</option>
-              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+              {uniqueLocations.map((location) => (
+                <option key={location} value={location}>
+                  {location}
+                </option>
+              ))}
             </select>
           </div>
           
@@ -108,11 +126,11 @@ function index() {
               onChange={(e) => setAreaFilter(e.target.value)}
             >
               <option value="">Área</option>
-              <option value="Saúde e Bem-estar">Saúde e Bem-estar</option>
-              <option value="Educação">Educação</option>
-              <option value="Fisioterapia">Fisioterapia</option>
-              <option value="Contabilidade">Contabilidade</option>
-              <option value="Direito">Direito</option>
+              {uniqueOperations.map((operation) => (
+                <option key={operation} value={operation}>
+                  {operation}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -141,7 +159,7 @@ function index() {
                 title={partner.name}
                 benefit={partner.benefit || 'Benefício não especificado'}
                 operations={partner.operations.length > 0 ? partner.operations[0] : 'Não especificado'}
-                location="Via CISUM Club" // Ajuste conforme necessário
+                location={partner.location || 'Maceió - AL'}
                 links={partner.links}
               />
             ))
