@@ -25,7 +25,7 @@ function index() {
        await authService.login(email, password)
       console.log("Login realizado com sucesso:")
       // Redirecionar para a página principal após login bem-sucedido
-      window.location.href = '/';
+      window.location.href = '/parceiros';
     } catch (err: any) {
     //   console.error("Erro ao fazer login:", err)
       setError(

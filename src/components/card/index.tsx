@@ -37,6 +37,7 @@ interface CardProps {
   benefit?: string;
   location?: string;
   links?: LinkItem[];
+  situation?: string; // Adicionado campo situation
   onDelete?: () => void; // Callback opcional para atualizar a lista após exclusão
 }
 
@@ -74,44 +75,85 @@ function index(props: CardProps) {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   
-  // Estados para os campos do formulário de edição
+  // Estados para os campos do formulário de edição - atualizado para incluir situation
   const [editForm, setEditForm] = useState({
     title: props.title,
     operations: props.operations || '',
     benefit: props.benefit || '',
-    location: props.location || ''
+    location: props.location || '',
+    links: props.links || [],
+    situation: props.situation || 'Primeiro Contato' // Adicionado com valor padrão
+  });
+  
+  // Estado para novo link sendo adicionado
+  const [newLink, setNewLink] = useState<{ name: string; type: string }>({
+    name: '',
+    type: ''
   });
   
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Função para atualizar os campos do formulário
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setEditForm(prev => ({ ...prev, [name]: value }));
   };
   
+  // Função para adicionar um link à lista
+  const handleAddLink = () => {
+    if (!newLink.name || !newLink.type) {
+      toast.error("URL e tipo do link são obrigatórios.");
+      return;
+    }
+    
+    setEditForm(prev => ({
+      ...prev,
+      links: [...prev.links, { id: null, ...newLink }]
+    }));
+    
+    setNewLink({ name: '', type: '' }); // Limpar o formulário do link
+  };
+
+  // Função para remover um link da lista
+  const handleRemoveLink = (index: number) => {
+    setEditForm(prev => ({
+      ...prev,
+      links: prev.links.filter((_, i) => i !== index)
+    }));
+  };
+  
   // Função para salvar as alterações
   const handleSaveChanges = async () => {
+    if (!editForm.title) {
+      toast.error("O nome do parceiro é obrigatório.");
+      return;
+    }
+    
+    setIsSaving(true);
+    
     try {
       // Preparar o payload conforme a estrutura esperada pela API
       const payload = {
         name: editForm.title,
         benefit: editForm.benefit,
-        // Outros campos obrigatórios que podem ser mantidos do parceiro atual
-        userId: "string", // Se disponível, use o valor original
+        userId: "string", 
         id: props.id,
-        description: "", // Se disponível, use o valor original
-        email: "", // Se disponível, use o valor original
-        situation: "Active", // Manter ativo, a menos que você tenha um controle para isso
-        associateImagemUrl: "", // Manter a URL original se disponível
+        description: "", 
+        email: "", 
+        situation: editForm.situation, // Usando o valor selecionado
+        associateImagemUrl: "", 
         operations: [
           {
             name: editForm.operations
           }
-        ]
+        ],
+        location: editForm.location,
+        links: editForm.links // Adicionar links ao payload
       };
 
       // Fazer a chamada à API para atualizar o parceiro
+      console.log("Payload para atualização:", payload);
       await api.put(`/associate/${props.id}`, payload);
       
       // Notificar sucesso
@@ -127,6 +169,8 @@ function index(props: CardProps) {
     } catch (error: any) {
       console.error('Erro ao atualizar parceiro:', error);
       toast.error(error.response?.data?.message || "Ocorreu um erro ao atualizar o parceiro.");
+    } finally {
+      setIsSaving(false);
     }
   };
   
@@ -164,7 +208,7 @@ function index(props: CardProps) {
   };
   
   return (
-    <div className="flex items-center p-2 h-[200px] w-[360px] md:h-[300px] md:w-[600px] bg-white rounded-lg shadow-lg relative">
+    <div className="flex items-center p-2 h-[250px] w-[360px] md:h-[300px] md:w-[600px] bg-white rounded-lg shadow-lg relative">
       
       {isAuthenticated && (
         <div className="absolute top-4 right-2">
@@ -206,6 +250,13 @@ function index(props: CardProps) {
           <div className="flex items-center md:mb-2">
             <h2 className="text-[15px] md:text-xl font-bold truncate">{props.title}</h2>
           </div>
+          
+          {/* Mostrar situação apenas para usuários autenticados */}
+          {isAuthenticated && props.situation && (
+            <p className="w-full text-[11px] md:text-[15px] overflow-hidden text-ellipsis mb-1">
+              <span className="font-bold">Situação: </span>{props.situation}
+            </p>
+          )}
           
           <p className="w-full text-[11px] md:text-[15px] overflow-hidden text-ellipsis">
             <span className="font-bold">Área: </span>
@@ -250,7 +301,7 @@ function index(props: CardProps) {
 
       </div>
       
-      {/* Diálogo de Edição */}
+      {/* Diálogo de Edição - Atualizado com gerenciamento de links */}
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -272,6 +323,24 @@ function index(props: CardProps) {
                 onChange={handleInputChange}
                 className="col-span-3"
               />
+            </div>
+            
+            {/* Campo de situação */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="situation" className="text-right">
+                Situação
+              </Label>
+              <select
+                id="situation"
+                name="situation"
+                value={editForm.situation}
+                onChange={handleInputChange}
+                className="col-span-3 h-10 rounded-md border border-input px-3 py-2 text-sm"
+              >
+                <option value="Primeiro Contato">Primeiro Contato</option>
+                <option value="Parceria Concluída e Publicada">Parceria Concluída e Publicada</option>
+                <option value="Parceria Rejeitada">Parceria Rejeitada</option>
+              </select>
             </div>
             
             <div className="grid grid-cols-4 items-center gap-4">
@@ -313,14 +382,80 @@ function index(props: CardProps) {
                 className="col-span-3"
               />
             </div>
+            
+            {/* Nova seção de links */}
+            <div className="grid grid-cols-4 items-center gap-4 mt-4">
+              <Label className="text-right">
+                Links
+              </Label>
+              <div className="col-span-3">
+                {/* Lista de links já adicionados */}
+                {editForm.links && editForm.links.length > 0 && (
+                  <div className="mb-3 space-y-2">
+                    {editForm.links.map((link, index) => (
+                      <div key={index} className="flex items-center justify-between bg-gray-100 p-2 rounded">
+                        <div className="truncate mr-2 text-sm">
+                          <span className="font-semibold">{link.type}:</span> {link.name}
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemoveLink(index)}
+                          className="h-6 w-6 p-0"
+                        >
+                          <Trash size={14} />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Formulário para adicionar novo link */}
+                <div className="space-y-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    <Input
+                      placeholder="URL (ex: https://linkedin.com/company)"
+                      value={newLink.name}
+                      onChange={(e) => setNewLink(prev => ({ ...prev, name: e.target.value }))}
+                    />
+                    <select
+                      className="h-10 rounded-md border border-input px-3 py-2 text-sm"
+                      value={newLink.type}
+                      onChange={(e) => setNewLink(prev => ({ ...prev, type: e.target.value }))}
+                    >
+                      <option value="">Tipo</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="linkedin">LinkedIn</option>
+                      <option value="twitter">Twitter</option>
+                      <option value="youtube">YouTube</option>
+                      <option value="website">Website</option>
+                    </select>
+                  </div>
+                  <Button 
+                    type="button"
+                    onClick={handleAddLink}
+                    size="sm"
+                    className="w-full"
+                  >
+                    Adicionar
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
           
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setEditDialogOpen(false)}>
               Cancelar
             </Button>
-            <Button type="button"  onClick={handleSaveChanges}>
-              Salvar alterações
+            <Button 
+              type="button" 
+              onClick={handleSaveChanges}
+              disabled={isSaving}
+            >
+              {isSaving ? "Salvando..." : "Salvar alterações"}
             </Button>
           </DialogFooter>
         </DialogContent>
