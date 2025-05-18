@@ -131,14 +131,12 @@ function index() {
     const matchesArea = areaFilter === '' || 
       (partner.operations && partner.operations.some(op => op.toLowerCase().includes(areaFilter.toLowerCase())));
     
-    // Corrigido: agora verifica se o local do parceiro corresponde ao filtro selecionado
     const matchesLocation = locationFilter === '' || 
       (partner.location && partner.location.toLowerCase().includes(locationFilter.toLowerCase()));
     
     return matchesSearch && matchesArea && matchesLocation;
   });
 
-  // Adicionar esta função para lidar com mudanças nos campos do formulário
   const handleNewPartnerInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewPartnerForm(prev => ({ ...prev, [name]: value }));
@@ -167,7 +165,6 @@ function index() {
     }));
   };
 
-  // Adicionar esta função para criar um novo parceiro
   const handleCreatePartner = async () => {
     if (!newPartnerForm.name) {
       toast.error("O nome do parceiro é obrigatório.");

@@ -19,7 +19,12 @@ function index() {
             <p className='text-[10px]  mb-5'>
               Por mês!
             </p>
-            <Button variant="default">Eu Quero</Button>
+            <Button 
+              variant="default"
+              onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdWfm7hib3maPR4FKf0M8tef61spSS45Hj1Ac1yTyxX5z8D2Q/viewform', '_blank', 'noopener,noreferrer')}
+            >
+              Eu Quero
+            </Button>
           </div>
           
 
@@ -33,7 +38,12 @@ function index() {
             <p className='text-[10px]  mb-5'>
               Pagamento único a partir de US$ 10,00
             </p>
-            <Button variant="default" >Lista de espera</Button>
+            <Button 
+              variant="default"
+              onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdmyMWsiI1PR6K4QOgRA4aSMLmcCtJ_ITrqDLRAr-4jnMsnRA/viewform', '_blank', 'noopener,noreferrer')}
+            >
+              Lista de espera
+            </Button>
           </div>
 
           <div className='bg-white w-[200px] h-[300px] rounded-lg shadow-lg flex flex-col justify-center items-center md:h-[250px] md:mt-7'>
@@ -46,7 +56,12 @@ function index() {
             <p className='text-[10px]  mb-5'>
               Por Ano!
             </p>
-            <Button variant="default">Eu Quero</Button>
+            <Button 
+              variant="default"
+              onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdWfm7hib3maPR4FKf0M8tef61spSS45Hj1Ac1yTyxX5z8D2Q/viewform', '_blank', 'noopener,noreferrer')}
+            >
+              Eu Quero
+            </Button>
           </div>
 
         </div>
