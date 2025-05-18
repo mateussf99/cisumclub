@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { authService } from "@/services/api";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Logo from '../../assets/Logo.png';
 
 function index() {
@@ -10,7 +9,6 @@ function index() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const navigate = useNavigate()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()

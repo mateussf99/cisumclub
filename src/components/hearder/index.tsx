@@ -8,12 +8,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from '@/contexts/AuthContext';
 import { Menu } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
 
 function Index() {
   const location = useLocation();
-  const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
   
   // Função para fazer logout
