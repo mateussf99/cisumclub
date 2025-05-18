@@ -5,6 +5,7 @@ import Cliente from '../pages/cliente';
 import Home from '../pages/home';
 import Login from '../pages/login';
 import Parceiro from '../pages/parceiro';
+import Parceiros from '../pages/parceiros';
 import Quem_somos from '../pages/quem_somos';
 
 function AppRoutes() {
@@ -19,6 +20,7 @@ function AppRoutes() {
                     <Route path="/quem-somos" element={<Quem_somos />} />
                     <Route path="/cliente" element={<Cliente />} />
                     <Route path="/parceiro" element={<Parceiro />} />
+                    <Route path="/parceiros" element={<Parceiros />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>
             </div>

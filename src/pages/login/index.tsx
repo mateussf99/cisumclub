@@ -29,7 +29,6 @@ function index() {
       // Redirecionar para a página principal após login bem-sucedido
       navigate("/")
     } catch (err: any) {
-        console.log(email, password)
     //   console.error("Erro ao fazer login:", err)
       setError(
         err.response?.data?.message || 
