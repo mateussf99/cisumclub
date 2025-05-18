@@ -79,7 +79,6 @@ function index(props: CardProps) {
   // Estados para os campos do formulário de edição
   const [editForm, setEditForm] = useState({
     title: props.title,
-    operations: props.operations || '',
     benefit: props.benefit || '',
     location: props.location || '',
     links: props.links || [],
@@ -147,10 +146,10 @@ function index(props: CardProps) {
         description: "", 
         email: "", 
         situation: editForm.situation,
-        associateImagemUrl: editForm.associateImagemUrl, // Link do Google Drive
+        associateImagemUrl: editForm.associateImagemUrl,
         operations: [
           {
-            name: editForm.operations
+            name: props.operations || '' // Manter o operations original
           }
         ],
         location: editForm.location,
@@ -361,19 +360,6 @@ function index(props: CardProps) {
                 <option value="Parceria Concluída e Publicada">Parceria Concluída e Publicada</option>
                 <option value="Parceria Rejeitada">Parceria Rejeitada</option>
               </select>
-            </div>
-            
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="operations" className="text-right">
-                Área
-              </Label>
-              <Input
-                id="operations"
-                name="operations"
-                value={editForm.operations}
-                onChange={handleInputChange}
-                className="col-span-3"
-              />
             </div>
             
             <div className="grid grid-cols-4 items-center gap-4">
