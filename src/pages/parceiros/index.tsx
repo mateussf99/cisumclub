@@ -4,7 +4,7 @@ import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Card from '../../components/card';
 
-// Interface para tipar os dados da API
+
 interface Partner {
   id: number;
   name: string;
