@@ -6,38 +6,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authService } from "@/services/api";
+import { useAuth } from '@/contexts/AuthContext';
 import { Menu } from 'lucide-react';
-import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
 
 function Index() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   
-  // Verificar estado de autenticação quando o componente montar
-  useEffect(() => {
-  const checkAuth = async () => {
-    const isAuth = await authService.isAuthenticated();
-    setIsAuthenticated(isAuth);
-  };
-  
-  checkAuth();
-}, []);
-
   // Função para fazer logout
-  const handleLogout = () => {
-    authService.logout();
-    setIsAuthenticated(false);
-    navigate('/'); // Redireciona para a página inicial
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = '/';
   };
   
   // Componente de login/logout para desktop
   const loginLogoutButton = isAuthenticated ? (
     <Button variant="outline" onClick={handleLogout}>
-      Logout
+      Sair
     </Button>
   ) : (
     <Link to="/login">
@@ -50,7 +38,7 @@ function Index() {
   // Componente de login/logout para mobile
   const loginLogoutMenuItem = isAuthenticated ? (
     <DropdownMenuItem asChild>
-      <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">Logout</Button>
+      <Button variant="ghost" onClick={handleLogout} className="w-full justify-start">Sair</Button>
     </DropdownMenuItem>
   ) : (
     <DropdownMenuItem asChild>

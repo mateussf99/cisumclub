@@ -57,14 +57,16 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 // Funções de autenticação
 const authService = {
+  _cachedAuthState: false, // Salva o estado em memória durante a sessão
+  
   async login(email: string, password: string): Promise<any> {
     try {
-      // Parâmetro useCookies=true para instruir a API a usar cookies
       const response = await api.post('/identity/login?useCookies=true', { 
         email, 
         password 
       });
       
+      this._cachedAuthState = true; // Atualiza o estado em memória
       return response.data;
     } catch (error) {
       console.error('Erro no login:', error);
@@ -74,40 +76,33 @@ const authService = {
   
   async logout(): Promise<void> {
     try {
-      // Tentar chamar o endpoint de logout da API
       await api.post('/identity/logout');
       console.log('Logout bem-sucedido no servidor');
     } catch (error) {
       console.error('Erro ao fazer logout no servidor:', error);
-      // Continuar mesmo com erro, para garantir limpeza local
     }
     
-    // Limpar cookies locais
+    this._cachedAuthState = false; // Atualiza o estado em memória
     removeToken();
-    console.log('Cookies de autenticação removidos localmente');
   },
   
-  // Modifique o método isAuthenticated para usar um endpoint existente
-  isAuthenticated: async function(): Promise<boolean> {
+  async isAuthenticated(): Promise<boolean> {
     try {
-      // Tente acessar qualquer endpoint protegido já existente
-      // Por exemplo, um endpoint que busca dados do usuário ou qualquer outro recurso protegido
-      const response = await api.get('/associate/manage'); // ou qualquer outro endpoint protegido que você já tenha
-      if (response.status === 200) {
-        console.log('Endpoint protegido acessado com sucesso. Status:', response.status);
-      }
-      console.log('Usuário autenticado com sucesso');
-      // Se não lançar erro, está autenticado
+      // Tenta fazer uma requisição a qualquer endpoint protegido que exija autenticação
+      // Altere para um endpoint que você sabe que existe na sua API
+      await api.get('identity/manage/info'); 
+      
+      this._cachedAuthState = true; // Atualiza o cache
       return true;
     } catch (error: any) {
-      // Se receber 401 (Unauthorized) ou 403 (Forbidden), não está autenticado
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+        this._cachedAuthState = false;
         return false;
       }
       
-      // Se for outro tipo de erro (como 500, 404, etc.), provável problema de rede ou API
+      // Se for outro tipo de erro, verifica o estado em cache
       console.error('Erro ao verificar autenticação:', error);
-      return false;
+      return this._cachedAuthState;
     }
   },
 };

@@ -6,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from '@/contexts/AuthContext';
 import { EllipsisVertical, Facebook, Globe, Image, Instagram, Linkedin, Pencil, Trash, Twitter, Youtube } from "lucide-react";
 
 // Interface atualizada para refletir a estrutura dos dados
@@ -51,33 +52,37 @@ const getSocialIcon = (type: string) => {
 
 function index(props: CardProps) {
   const maxChars = 45;
+  const { isAuthenticated } = useAuth(); // Obtém o estado de autenticação
   
   return (
-    <div className="flex items-center p-2  h-[200px] w-[360px] md:h-[300px] md:w-[600px] bg-white rounded-lg shadow-lg relative">
-      <div className="absolute top-4 right-2 ">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <EllipsisVertical size={20} className="cursor-pointer hover:text-primary transition-colors" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="font-bold border-none bg-white">
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Button className="font-bold flex items-center gap-2" variant='link'>
-                <Trash size={16} className="text-red-500" /> Excluir
-              </Button>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Button className="font-bold flex items-center gap-2" variant='link'>
-                <Pencil size={16} className="text-blue-500" /> Editar
-              </Button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+    <div className="flex items-center p-2 h-[200px] w-[360px] md:h-[300px] md:w-[600px] bg-white rounded-lg shadow-lg relative">
+      
+      
+      {isAuthenticated && (
+        <div className="absolute top-4 right-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <EllipsisVertical size={20} className="cursor-pointer hover:text-primary transition-colors" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="font-bold border-none bg-white">
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Button className="font-bold flex items-center gap-2" variant='link'>
+                  <Trash size={16} className="text-red-500" /> Excluir
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Button className="font-bold flex items-center gap-2" variant='link'>
+                  <Pencil size={16} className="text-blue-500" /> Editar
+                </Button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      )}
 
       <div className="flex item-center justify-items-center w-[300px] md:w-[500px]">
         <div className="flex rounded-10 w-[100px] md:w-[200px] items-center justify-center">
-          {/* Remova a prop size e use classes responsivas */}
           <Image className="text-gray-500 h-16 w-16 md:h-24 md:w-24" />
         </div>
         

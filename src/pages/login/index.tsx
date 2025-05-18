@@ -24,10 +24,10 @@ function index() {
     setError("")
     
     try {
-      const response = await authService.login(email, password)
-      console.log("Login realizado com sucesso:", response)
+       await authService.login(email, password)
+      console.log("Login realizado com sucesso:")
       // Redirecionar para a página principal após login bem-sucedido
-      navigate("/")
+      window.location.href = '/';
     } catch (err: any) {
     //   console.error("Erro ao fazer login:", err)
       setError(
