@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Card from '../../components/card';
 
-// Atualize a interface para incluir links
+
 interface NewPartnerForm {
   name: string;
   operations: string;
@@ -28,8 +28,8 @@ interface NewPartnerForm {
     name: string;
     type: string;
   }[];
-  associateImagemUrl?: string; // Adicionado campo para URL da imagem
-  situation: string; // Também é bom adicionar o campo situation
+  associateImagemUrl?: string; 
+  situation: string;
 }
 
 interface Partner {
@@ -76,7 +76,7 @@ function index() {
     benefit: '',
     location: '',
     links: [],
-    associateImagemUrl: '', // Inicializado vazio
+    associateImagemUrl: '', 
     situation: 'Primeiro Contato' // Valor padrão
   });
   const [newLink, setNewLink] = useState<{ name: string; type: string }>({
@@ -84,7 +84,6 @@ function index() {
     type: ''
   });
 
-  // Função para buscar os parceiros da API
   const fetchPartners = async () => {
     try {
       setLoading(true);
@@ -97,14 +96,13 @@ function index() {
       setPartners(response.data.data);
       
       
-      // Extrair localizações únicas
+      
       const locations = response.data.data
         .map(partner => partner.location)
         .filter((location): location is string => location !== null && location !== '')
         .sort();
       setUniqueLocations(Array.from(new Set(locations)));
 
-      // Extrair operações únicas
       const operations = response.data.data
         .flatMap(partner => partner.operations)
         .filter(op => op !== '')
@@ -124,7 +122,7 @@ function index() {
     fetchPartners();
   }, []);
 
-  // Filtrar parceiros com base nos filtros
+
   const filteredPartners = partners.filter(partner => {
     const matchesSearch = searchTerm === '' || 
       partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -144,7 +142,7 @@ function index() {
     setNewPartnerForm(prev => ({ ...prev, [name]: value }));
   };
 
-  // Função para adicionar um link à lista
+
   const handleAddLink = () => {
     if (!newLink.name || !newLink.type) {
       toast.error("URL e tipo do link são obrigatórios.");
@@ -156,10 +154,10 @@ function index() {
       links: [...prev.links, { id: null, ...newLink }]
     }));
     
-    setNewLink({ name: '', type: '' }); // Limpar o formulário do link
+    setNewLink({ name: '', type: '' }); 
   };
 
-  // Função para remover um link da lista
+
   const handleRemoveLink = (index: number) => {
     setNewPartnerForm(prev => ({
       ...prev,
@@ -176,7 +174,6 @@ function index() {
     setIsCreating(true);
 
     try {
-      // Preparar o payload para a API
       const payload = {
         name: newPartnerForm.name,
         benefit: newPartnerForm.benefit,
@@ -184,7 +181,7 @@ function index() {
         description: "",
         email: "",
         situation: newPartnerForm.situation,
-        associateImagemUrl: newPartnerForm.associateImagemUrl, // Usar o valor do formulário
+        associateImagemUrl: newPartnerForm.associateImagemUrl,
         operations: [
           {
             name: newPartnerForm.operations
@@ -194,25 +191,23 @@ function index() {
         links: newPartnerForm.links
       };
 
-      // Enviar para a API
       await api.post('/associate', payload);
       
-      // Notificar sucesso
+
       toast.success(`Parceiro "${newPartnerForm.name}" criado com sucesso!`);
       
-      // Resetar o formulário e fechar o diálogo
+      
       setNewPartnerForm({
         name: '',
         operations: '',
         benefit: '',
         location: '',
         links: [],
-        associateImagemUrl: '', // Adicionar este campo
-        situation: 'Primeiro Contato' // Adicionar este campo com valor padrão
+        associateImagemUrl: '', 
+        situation: 'Primeiro Contato' 
       });
       setCreateDialogOpen(false);
       
-      // Recarregar a lista
       fetchPartners();
     } catch (error: any) {
       console.error('Erro ao criar parceiro:', error);
@@ -274,8 +269,7 @@ function index() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
-          {/* Adicionar botão de criação */}
+        
           {isAuthenticated && (
             <Button 
               variant="outline"
@@ -305,7 +299,7 @@ function index() {
                 location={partner.location || 'Maceió - AL'}
                 links={partner.links}
                 situation={partner.situation} 
-                associateImagemUrl={partner.associateImagemUrl} // Adicionar esta prop
+                associateImagemUrl={partner.associateImagemUrl} 
                 onDelete={fetchPartners}
               />
             ))
@@ -317,7 +311,7 @@ function index() {
         </div>
       )}
 
-      {/* Diálogo para criar novo parceiro */}
+      
       <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -342,7 +336,6 @@ function index() {
               />
             </div>
             
-            {/* Campo para Logo (igual ao do Card) */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="associateImagemUrl" className="text-right">
                 Logo
@@ -359,7 +352,6 @@ function index() {
               </div>
             </div>
             
-            {/* Campo de situação */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="situation" className="text-right">
                 Situação
@@ -417,7 +409,7 @@ function index() {
               />
             </div>
 
-            {/* Seção de links */}
+            
             <div className="grid grid-cols-4 items-center gap-4 mt-4">
               <Label className="text-right">
                 Links
@@ -445,7 +437,7 @@ function index() {
                   </div>
                 )}
                 
-                {/* Formulário para adicionar novo link */}
+               
                 <div className="space-y-2">
                   <div className="grid grid-cols-2 gap-2">
                     <Input
