@@ -2,11 +2,9 @@ import type { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 
 
-let API_URL = import.meta.env.VITE_API_URL;
-
-if (API_URL && API_URL.startsWith('http:')) {
-  API_URL = API_URL.replace('http:', 'https:');
-}
+//lembra de volta para o .env
+const API_URL = import.meta.env.VITE_API_URL;
+//const API_URL = '/api'; // Manter proxy para evitar CORS
 const AUTH_COOKIE_NAME = 'AspNetCore.Identity.Application'; // Nome exato visto no Storage
 
 
@@ -18,20 +16,6 @@ const api: AxiosInstance = axios.create({
   withCredentials: true // Crucial: permite que o Axios envie e receba cookies
 });
 
-
-api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  
-  if (config.url && config.url.startsWith('http:')) {
-    config.url = config.url.replace('http:', 'https:');
-  }
-  
-  
-  if (config.baseURL && config.baseURL.startsWith('http:')) {
-    config.baseURL = config.baseURL.replace('http:', 'https:');
-  }
-  
-  return config;
-});
 
 // n usa pq o back ta funcionado com o token publico
 const getToken = (): string | undefined => {
@@ -103,11 +87,9 @@ const authService = {
   async isAuthenticated(): Promise<boolean> {
     try {
       
-      if (this._cachedAuthState) {
-        return true; 
-      } 
+      await api.get('identity/manage/info'); 
       
-      
+      this._cachedAuthState = true; 
       return true;
     } catch (error: any) {
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
