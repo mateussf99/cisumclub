@@ -1,5 +1,5 @@
 # Cisum Club React + TypeScript + Vite
-###Clonar o projeto
+##Clonar o projeto
 abra o terminal e coloque o comando com o linkd do repositorio
 ```
 git clone + link do repositorio
