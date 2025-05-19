@@ -103,9 +103,11 @@ const authService = {
   async isAuthenticated(): Promise<boolean> {
     try {
       
-      await api.get('identity/manage/info'); 
+      if (this._cachedAuthState) {
+        return true; 
+      } 
       
-      this._cachedAuthState = true; 
+      
       return true;
     } catch (error: any) {
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
