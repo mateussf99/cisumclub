@@ -87,7 +87,7 @@ const authService = {
   async isAuthenticated(): Promise<boolean> {
     try {
       
-      await api.get('identity/manage/info'); 
+      await api.get('/associate/manage'); 
       
       this._cachedAuthState = true; 
       return true;
