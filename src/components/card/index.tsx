@@ -237,7 +237,7 @@ function index(props: CardProps) {
             <img 
               src={props.associateImagemUrl}
               alt={`Logo ${props.title}`}
-              className="h-16 w-16 md:h-24 md:w-24 object-contain"
+              className="h-24 w-24 md:h-48 md:w-48 object-contain"
               onError={() => {
                 // Se a imagem falhar, marcamos o erro e exibimos o ícone
                 setImageError(true);
