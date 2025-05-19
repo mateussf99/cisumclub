@@ -87,11 +87,9 @@ const authService = {
   async isAuthenticated(): Promise<boolean> {
     try {
       
-      if (this._cachedAuthState) {
-        return true; 
-      } 
+      await api.get('/associate/manage'); 
       
-      
+      this._cachedAuthState = true; 
       return true;
     } catch (error: any) {
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
