@@ -4,7 +4,7 @@ import axios from 'axios';
 
 //lembra de volta para o .env
 const API_URL = import.meta.env.VITE_API_URL;
-//const API_URL = '/api'; // Manter proxy para evitar CORS
+//const API_URL = '/api'; // Manter proxy para evitar CORS no desenvolvimento
 const AUTH_COOKIE_NAME = 'AspNetCore.Identity.Application'; // Nome exato visto no Storage
 
 
@@ -15,7 +15,6 @@ const api: AxiosInstance = axios.create({
   },
   withCredentials: true // Crucial: permite que o Axios envie e receba cookies
 });
-
 
 // n usa pq o back ta funcionado com o token publico
 const getToken = (): string | undefined => {
@@ -87,7 +86,7 @@ const authService = {
   async isAuthenticated(): Promise<boolean> {
     try {
       
-      await api.get('identity/manage/info'); 
+      await api.get('/associate/manage'); 
       
       this._cachedAuthState = true; 
       return true;
