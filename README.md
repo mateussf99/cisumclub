@@ -11,7 +11,7 @@ abra o terminal e coloque o comando
 ```
 npm i
 ```
-criar o .env apartir do .env.example e colocar o link da api
+## Criar o .env a partir do .env.example e colocar o link da api
 
 ## Rodando o projeto local
 abra o terminal e coloque o comando
