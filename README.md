@@ -17,7 +17,7 @@ VITE_API_URL=https://api.example.com (aqui vai o )
 ```
 ## Para utilizar imagem direto do google drive
 ```
-[VITE_API_URL=https://api.example.com (aqui vai o )](https://drive.google.com/thumbnail?id=(id  da imagem aqui))
+https://drive.google.com/thumbnail?id=(id  da imagem aqui)
 ```
 ## Rodando o projeto local
 abra o terminal e coloque o comando
