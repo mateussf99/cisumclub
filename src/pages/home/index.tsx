@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
 import Image1 from "../../assets/image1.png";
 import Apoiador1 from "../../assets/apoiador1.png";
 import Apoiador2 from "../../assets/apoiador2.jpg";
@@ -22,7 +23,9 @@ const index = () => {
           <p className='text-justify md:text-3xl mt-5'>
             Acesse um clube que conecta empresas e clientes, oferecendo benefícios exclusivos e personalizados de forma simples e prática.
           </p>
-          <Button variant="default" className='md:text-xl h-11'>Empresas Paceiras</Button>
+          <Link to="/parceiros">
+            <Button variant="default" className='md:text-xl h-11'>Empresas Paceiras</Button>
+          </Link>
         </div>
         <div className='hidden lg:flex'>
           <img src={Image1} alt="imagem que mostra pesoas conectadas"/>
