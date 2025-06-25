@@ -236,7 +236,7 @@ function index(props: CardProps) {
             <img 
               src={props.associateImagemUrl}
               alt={`Logo ${props.title}`}
-              style= "border-radius: 10px;"
+              style={{ borderRadius: "10px" }}
               className="h-24 w-24 md:h-48 md:w-48 object-contain"
               onError={() => {
                 setImageError(true);
