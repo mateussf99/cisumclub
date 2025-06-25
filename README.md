@@ -12,7 +12,9 @@ abra o terminal e coloque o comando
 npm i
 ```
 ## Criar o .env a partir do .env.example e colocar o link da api
-
+```
+VITE_API_URL=https://api.example.com
+```
 ## Rodando o projeto local
 abra o terminal e coloque o comando
 ```

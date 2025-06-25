@@ -231,11 +231,12 @@ function index(props: CardProps) {
       )}
 
       <div className="flex item-center justify-items-center w-[300px] md:w-[500px]">
-        <div className="flex rounded-10 w-[100px] md:w-[200px] items-center justify-center">
+        <div className="flex  w-[100px] md:w-[200px] items-center justify-center">
           {props.associateImagemUrl && !imageError ? (
             <img 
               src={props.associateImagemUrl}
               alt={`Logo ${props.title}`}
+              style= "border-radius: 10px;"
               className="h-24 w-24 md:h-48 md:w-48 object-contain"
               onError={() => {
                 setImageError(true);
