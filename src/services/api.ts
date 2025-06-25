@@ -4,7 +4,7 @@ import axios from 'axios';
 
 //lembra de volta para o .env
 const API_URL = import.meta.env.VITE_API_URL;
-//const API_URL = '/api'; // Manter proxy para evitar CORS no desenvolvimento
+// const API_URL = '/api'; // Manter proxy para evitar CORS no desenvolvimento
 const AUTH_COOKIE_NAME = 'AspNetCore.Identity.Application'; // Nome exato visto no Storage
 
 
