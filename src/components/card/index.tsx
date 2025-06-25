@@ -22,6 +22,8 @@ import { api } from '@/services/api';
 import { EllipsisVertical, Facebook, Globe, Image, Instagram, Linkedin, Pencil, Trash, Twitter, Youtube } from "lucide-react";
 import { useState } from "react";
 import { toast } from 'react-toastify';
+import './style.css';
+
 
 
 interface LinkItem {
@@ -230,14 +232,13 @@ function index(props: CardProps) {
         </div>
       )}
 
-      <div className="flex item-center justify-items-center w-[300px] md:w-[500px]">
+      <div className="flex gap-1 item-center justify-items-center w-[300px] md:w-[500px]">
         <div className="flex  w-[100px] md:w-[200px] items-center justify-center">
           {props.associateImagemUrl && !imageError ? (
             <img 
               src={props.associateImagemUrl}
               alt={`Logo ${props.title}`}
-              style={{ borderRadius: "20px" }}
-              className="h-24 w-24 md:h-48 md:w-48 object-contain"
+              className="h-24 w-24 md:h-48 md:w-48 object-contain logo"
               onError={() => {
                 setImageError(true);
               }}
